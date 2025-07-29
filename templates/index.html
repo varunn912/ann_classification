@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Customer Churn Prediction 🚀</h1>
+        <p>Enter customer details below to predict churn probability.</p>
+        
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="credit_score">Credit Score</label>
+                    <input type="number" id="credit_score" name="CreditScore" placeholder="e.g., 650" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="Age" placeholder="e.g., 35" required>
+                </div>
+                <div class="form-group">
+                    <label for="tenure">Tenure (Years)</label>
+                    <input type="number" id="tenure" name="Tenure" placeholder="e.g., 5" required>
+                </div>
+                <div class="form-group">
+                    <label for="balance">Balance</label>
+                    <input type="number" id="balance" name="Balance" step="any" placeholder="e.g., 75000" required>
+                </div>
+                <div class="form-group">
+                    <label for="num_of_products">Number of Products</label>
+                    <input type="number" id="num_of_products" name="NumOfProducts" placeholder="e.g., 1" required>
+                </div>
+                 <div class="form-group">
+                    <label for="estimated_salary">Estimated Salary</label>
+                    <input type="number" id="estimated_salary" name="EstimatedSalary" step="any" placeholder="e.g., 100000" required>
+                </div>
+                <div class="form-group">
+                    <label for="geography">Geography</label>
+                    <select id="geography" name="Geography">
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Spain">Spain</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="Gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="has_cr_card">Has Credit Card?</label>
+                    <select id="has_cr_card" name="HasCrCard">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="is_active_member">Is Active Member?</label>
+                    <select id="is_active_member" name="IsActiveMember">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn">Predict Churn</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="prediction-result {{ 'churn' if 'Likely to Churn' in prediction_text else 'stay' }}">
+            <h2>Prediction Result</h2>
+            <p>{{ prediction_text }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
